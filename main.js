@@ -7,6 +7,7 @@ const deleteAllTasksButton = document.querySelector('#clear-tasks')
 
 // == Global variable =============================================================
 let tasksList = []
+let isAllTasksCompleted = true
 
 const handleAddTask = () => {
   const taskValue = getInputValue(taskDescInput)
@@ -43,6 +44,7 @@ const completeAllTasks = () => {
     task.isCompleted = true
   })
   saveTasksIntoStorage(tasksList)
+  isAllTasksCompleted = true
 }
 
 const deleteTask = (taskId) => {
@@ -56,11 +58,30 @@ const clearTasks = () => {
   saveTasksIntoStorage(tasksList)
 }
 
+const clearAllTasks = () => {
+  tasksList.forEach(task => {
+    task.isCompleted = false
+  })
+  saveTasksIntoStorage(tasksList)
+  isAllTasksCompleted = false
+}
+
 const isTaskCompleted = (task) => task.isCompleted
 
 const renderTasks = () => {
   clearNodeChilds(tasksContainer)
-  tasksList.forEach(generateTaskElements)
+  tasksList.forEach((task) => {
+    generateTaskElements(task)
+    if(!task.isCompleted) {
+      isAllTasksCompleted = false 
+    }
+  })
+
+  if(isAllTasksCompleted) {
+    completeAllTasksButton.innerHTML = "Descompletar todas las tareas"
+  } else {
+    completeAllTasksButton.innerHTML = "Completar todas las tareas"
+  }
 }
 
 const generateTaskElements = (task) => {
@@ -114,6 +135,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 })
 
+document.getElementById("complete-all-tasks").addEventListener("click", myFunction,);
+ function myFunction() {
+   document.getElementById('complete-all-tasks').innerHTML = "Descompletar todas las tareas"
+}
+
 addTaskButton.addEventListener('click', () => {
   handleAddTask()
 })
@@ -123,12 +149,16 @@ taskDescInput.addEventListener('keydown', (event) => {
 })
 
 completeAllTasksButton.addEventListener('click', () => {
-  completeAllTasks()
+  if (isAllTasksCompleted) {
+    clearAllTasks()
+  } else {
+    completeAllTasks()
+  }
   renderTasks()
 })
 
 deleteAllTasksButton.addEventListener('click', () => {
-  if (confirm('¿Estás seguro de eliminar las tareas?')) {
+  if (confirm('¿Estás seguro de eliminar todas las tareas?')) {
     clearTasks()
     renderTasks()
   }
