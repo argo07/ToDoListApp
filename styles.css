@@ -9,9 +9,11 @@
     --blue: 13, 142, 255;
     --yellow: 255, 120, 66;
     --red: 252, 55, 0;
-    --gradint-01: rgba(var(--purple), 0.9), rgba(var(--blue), 0.8);
+    --pink: 255, 97, 234;
+    --gradint-01: rgba(var(--purple), 0.9), rgba(var(--white), 0.8);
     --gradint-02: rgba(var(--red)), rgba(var(--yellow));
-    --border-radius: 0.5rem;
+    --gradint-03: rgba(var(--pink), 0.5), rgba(var(--purple), 0.5);
+    --border-radius: 3.5rem;
     --max-width-responsive: 600px;
 }
 
@@ -39,7 +41,9 @@ body {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    position: relative
+    position: relative;
+    background:linear-gradient(to left, var(--gradint-03)),
+    url(https://fondosmil.com/fondo/27488.jpg);
 }
 
 body::before {
@@ -50,8 +54,6 @@ body::before {
     width: 100%;
     height: 30rem;
     z-index: -1;
-    background: linear-gradient(to right, var(--gradint-01)),
-        url(https://fondosmil.com/fondo/2257.jpg);
     background-size: cover;
     object-fit: cover;
     background-repeat: no-repeat;
@@ -63,6 +65,7 @@ body::before {
     }
 }
 
+
 /* Header styles */
 header {
     padding: 4rem 1rem ;
@@ -70,7 +73,9 @@ header {
 
 .title {
     font-size: 4rem;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color: rgb(var(--white));
+    transition: all 0.5s ease-in-out;
 }
 
 @media screen and (max-width: 600px) {
@@ -90,26 +95,27 @@ header {
     padding: 0 1.5rem;
     border-radius: var(--border-radius);
     border: none;
-    border-bottom: 0.2rem solid rgb(var(--primary-color));
+    border-bottom: 0.2rem solid rgb(var(--pink));
     background: rgb(var(--white));
     outline: none;
-    transition: all 0.2s linear;
+    transition: all 0.5s ease-in-out;
 }
 
 .input:focus {
-    box-shadow: 0rem 0rem 2rem 0rem rgba(var(--primary-color), 0.475);
+    box-shadow: 0rem 0rem 2rem 0rem rgba(var(--purple), 1);
 }
 
 /* Button styles */
 .button {
-    height: 5rem;
+    height: 3.5rem;
     padding: 0 1.5rem;
     font-size: 1.6rem;
     border-radius: var(--border-radius);
     border: none;
+    border-bottom: 0.2rem solid rgb(var(--pink));
     background: transparent;
     cursor: pointer;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.5s ease-in-out;
 }
 
 .button.btn-contrast {
@@ -119,7 +125,7 @@ header {
 
 .button.btn-contrast:hover {
     color: rgba(var(--purple));
-    box-shadow: 0rem 0rem 2rem 0rem rgba(var(--primary-color), 0.475);;
+    box-shadow: 0rem 0rem 2rem 0rem rgba(var(--purple), 0.475);;
 }
 
 .button.btn-primary {
@@ -128,12 +134,12 @@ header {
 }
 
 .button.btn-primary:hover {
-    box-shadow: 0rem 0rem 2rem 0rem rgba(var(--primary-color), 0.475);;
+    box-shadow: 0rem 0rem 2rem 0rem rgba(var(--), 0.475);;
 }
 
 .button.btn-outline-primary {
     background: linear-gradient(45deg, var(--gradint-01));
-    color: rgba(var(--blue));
+    color: rgba(var(--black));
     position: relative;
 }
 
@@ -144,14 +150,14 @@ header {
     left: 50%;
     width: calc(100% - 0.4rem);
     height: calc(100% - 0.4rem);
-    background: rgb(var(--white));
+    background: rgb(var(--gradint-01));
     color: rgb(var(--blue));
     border-radius: 100%;
     transform: translate(-50%, -50%);
 }
 
 .button.btn-outline-primary:hover {
-    box-shadow: 0rem 0rem 2rem 0rem rgba(var(--primary-color), 0.475);;
+    box-shadow: 0rem 0rem 2rem 0rem rgba(var(--pink), 0.475);;
     color: rgba(var(--purple));
 }
 
@@ -161,19 +167,28 @@ header {
 }
 
 .button.btn-danger:hover {
-    box-shadow: 0rem 0rem 2rem 0rem rgba(var(--primary-color), 0.475);;
+    box-shadow: 0rem 0rem 2rem 0rem rgba(var(--red), 0.5);;
 }
 
 .button.btn-text {
-    background: transparent;
-    color: rgb(var(--blue));
+    background: rgb(var(--pink));
+    color: rgb(var(--white));
     height: unset;
     padding: 1rem;
+    margin-bottom: 1rem;
 }
 
-.button.btn-text:hover{
+
+.button.btn-comp:hover{
     text-decoration: underline;
-    color: rgba(var(--purple));   
+    color: rgb(130, 255, 130);
+    box-shadow: 0rem 0rem 2rem 0rem rgba(var(--black), 0.2);;
+}
+
+.button.btn-del:hover{
+    text-decoration: underline;
+    color: rgb(236, 0, 0);
+    box-shadow: 0rem 0rem 2rem 0rem rgba(var(--black), 0.2);;
 }
 
 /* List Styles*/
@@ -207,7 +222,7 @@ header {
 }
 
 #list-todo li span[style*='line-through'] {
-    color: rgb(var(--blue));
+    color: rgba(var(--red))
 }
 
 #list-todo li button {
@@ -243,10 +258,10 @@ main .form-to-do {
 main .list-container {
     display: flex;
     flex-direction: column;
-    padding: 2rem;
-    background-color: rgb(var(--white));
+    padding: 1rem;
+    background-color: rgba(var(--white));
     border-radius: var(--border-radius);
-    box-shadow: 0rem 0.5rem 2rem -0.3rem rgba(var(--black), 0.1);;
+    box-shadow: 0rem 0.5rem 2rem -0.3rem rgba(var(--pink), 2);;
 }
 
 main .list-container .list-container__actions {
@@ -254,15 +269,15 @@ main .list-container .list-container__actions {
     justify-content: space-between;
     align-items: center;
     gap: 1rem 2rem;
-    border-top: 0.1rem solid rgba(var(--black), 0.1);
-    padding-top: 1.5rem;
+    /* border-top: 0.1rem solid rgba(var(--black), 0.5); */
+    padding-top: 1rem;
 }
 
 footer {
     display: flex;
     justify-content: center;
     width: 100%;
-    padding: 1.6rem;
+    padding: 0.5rem;
     position: fixed;
     bottom: 0;
     background: rgb(var(--white));
